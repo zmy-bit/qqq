@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限管理系统 - 首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+    <style>
+        .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
+        .icon {margin-right:10px;color:#1aa094;}
+        .icon-cray {color:#ffb800!important;}
+        .icon-blue {color:#1e9fff!important;}
+        .icon-tip {color:#ff5722!important;}
+        .layuimini-qiuck-module {text-align:center;margin-top: 10px}
+        .layuimini-qiuck-module a i {display:inline-block;width:100%;height:60px;line-height:60px;text-align:center;border-radius:2px;font-size:30px;background-color:#F8F8F8;color:#333;transition:all .3s;-webkit-transition:all .3s;}
+        .layuimini-qiuck-module a cite {position:relative;top:2px;display:block;color:#666;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
+        .welcome-module {width:100%;height:210px;}
+        .panel {background-color:#fff;border:1px solid transparent;border-radius:3px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+        .panel-body {padding:10px}
+        .panel-title {margin-top:0;margin-bottom:0;font-size:12px;color:inherit}
+        .label {display:inline;padding:.2em .6em .3em;font-size:75%;font-weight:700;line-height:1;color:#fff;text-align:center;white-space:nowrap;vertical-align:baseline;border-radius:.25em;margin-top: .3em;}
+        .layui-red {color:red}
+        .main_btn > p {height:40px;}
+        .layui-bg-number {background-color:#F8F8F8;}
+        .layuimini-notice:hover {background:#f6f6f6;}
+        .layuimini-notice {padding:7px 16px;clear:both;font-size:12px !important;cursor:pointer;position:relative;transition:background 0.2s ease-in-out;}
+        .layuimini-notice-title,.layuimini-notice-label {
+            padding-right: 70px !important;text-overflow:ellipsis!important;overflow:hidden!important;white-space:nowrap!important;}
+        .layuimini-notice-title {line-height:28px;font-size:14px;}
+        .layuimini-notice-extra {position:absolute;top:50%;margin-top:-8px;right:16px;display:inline-block;height:16px;color:#999;}
+    </style>
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md8">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-warning icon"></i>权限系统数据统计</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10">
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-blue">实时</span>
+                                                        <h5>用户总数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">186</h1>
+                                                        <small>含用户信息维护记录</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-cyan">实时</span>
+                                                        <h5>角色总数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">32</h1>
+                                                        <small>预设+自定义角色</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-orange">实时</span>
+                                                        <h5>权限项总数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">148</h1>
+                                                        <small>功能权限定义记录</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-col-xs6">
+                                            <div class="panel layui-bg-number">
+                                                <div class="panel-body">
+                                                    <div class="panel-title">
+                                                        <span class="label pull-right layui-bg-green">实时</span>
+                                                        <h5>关联关系数</h5>
+                                                    </div>
+                                                    <div class="panel-content">
+                                                        <h1 class="no-margins">526</h1>
+                                                        <small>用户-角色-权限关联</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>核心功能快捷入口</div>
+                            <div class="layui-card-body">
+                                <div class="welcome-module">
+                                    <div class="layui-row layui-col-space10 layuimini-qiuck">
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="1.html" data-title="用户管理" data-icon="fa fa-user">
+                                                <i class="fa fa-user"></i>
+                                                <cite>用户管理</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="2.html" data-title="角色管理" data-icon="fa fa-shield">
+                                                <i class="fa fa-shield"></i>
+                                                <cite>角色管理</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="3.html" data-title="权限项管理" data-icon="fa fa-key">
+                                                <i class="fa fa-key"></i>
+                                                <cite>权限项管理</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="4.html" data-title="关联管理" data-icon="fa fa-exchange">
+                                                <i class="fa fa-exchange"></i>
+                                                <cite>关联管理</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="5.html" data-title="操作日志" data-icon="fa fa-history">
+                                                <i class="fa fa-history"></i>
+                                                <cite>操作日志</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="6.html" data-title="系统安全" data-icon="fa fa-lock">
+                                                <i class="fa fa-lock"></i>
+                                                <cite>系统安全</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="7.html" data-title="系统配置" data-icon="fa fa-cog">
+                                                <i class="fa fa-cog"></i>
+                                                <cite>系统配置</cite>
+                                            </a>
+                                        </div>
+                                        <div class="layui-col-xs3 layuimini-qiuck-module">
+                                            <a href="javascript:;" layuimini-content-href="lll.html" data-title="权限统计" data-icon="fa fa-bar-chart">
+                                                <i class="fa fa-bar-chart"></i>
+                                                <cite>权限统计</cite>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
+                            <div class="layui-card-body">
+                                <div id="echarts-records" style="width: 100%;min-height:500px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>系统公告</div>
+                    <div class="layui-card-body layui-text">
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">用户状态管理功能优化完成，支持批量启用/禁用</div>
+                            <div class="layuimini-notice-extra">2024-05-28 10:15</div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">新增角色关联用户批量操作，提升配置效率</div>
+                            <div class="layuimini-notice-extra">2024-05-25 14:30</div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">权限项状态控制模块更新，新增失效提醒功能</div>
+                            <div class="layuimini-notice-extra">2024-05-20 09:42</div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">5月22日22:00-23:00进行关联关系模块维护</div>
+                            <div class="layuimini-notice-extra">2024-05-18 16:20</div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">操作日志查询功能升级，支持按用户/角色筛选</div>
+                            <div class="layuimini-notice-extra">2024-05-15 11:05</div>
+                        </div>
+                        <div class="layuimini-notice">
+                            <div class="layuimini-notice-title">登录安全控制强化，新增异地登录验证</div>
+                            <div class="layuimini-notice-extra">2024-05-10 15:38</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-fire icon"></i>版本信息</div>
+                    <div class="layui-card-body layui-text">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="100">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>项目名称</td>
+                                <td>
+                                    权限管理系统的设计与实现
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>当前版本</td>
+                                <td>v2.0.0</td>
+                            </tr>
+                            <tr>
+                                <td>主要特色</td>
+                                <td>响应式 / 清爽 / 极简 /支持移动端</td>
+                            </tr>
+                            <tr>
+                                <td>开发者</td>
+                                <td>
+                                    张敏怡
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="fa fa-paper-plane-o icon"></i>作者心语</div>
+                    <div class="layui-card-body layui-text layadmin-text">
+                        <p>码云地址：<a target="_blank" href="https://gitee.com/sye520zy/uolab">https://gitee.com/sye520zy/uolab</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+    layui.use(['layer', 'miniTab','echarts'], function () {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            miniTab = layui.miniTab,
+            echarts = layui.echarts;
+
+        miniTab.listen();
+
+        /**
+         * 查看公告信息
+         **/
+        $('body').on('click', '.layuimini-notice', function () {
+            var title = $(this).children('.layuimini-notice-title').text(),
+                noticeTime = $(this).children('.layuimini-notice-extra').text(),
+                content = $(this).children('.layuimini-notice-content').html() || '公告详情：' + title.split('，')[0] + '相关功能已完成更新，可前往对应模块体验。';
+            var html = '<div style="padding:15px 20px; text-align:justify; line-height: 22px;border-bottom:1px solid #e2e2e2;background-color: #2f4056;color: #ffffff">\n' +
+                '<div style="text-align: center;margin-bottom: 20px;font-weight: bold;border-bottom:1px solid #718fb5;padding-bottom: 5px"><h4 class="text-danger">' + title + '</h4></div>\n' +
+                '<div style="font-size: 12px">' + content + '</div>\n' +
+                '</div>\n';
+            parent.layer.open({
+                type: 1,
+                title: '系统公告'+'<span style="float: right;right: 1px;font-size: 12px;color: #b1b3b9;margin-top: 1px">'+noticeTime+'</span>',
+                area: '300px;',
+                shade: 0.8,
+                id: 'layuimini-notice',
+                btn: ['查看', '取消'],
+                btnAlign: 'c',
+                moveType: 1,
+                content:html,
+                success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.find('.layui-layer-btn0').attr({
+                        href: 'https://gitee.com/zhongshaofa/layuimini',
+                        target: '_blank'
+                    });
+                }
+            });
+        });
+
+        /**
+         * 权限管理系统 - 功能模块分布饼图
+         */
+        var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+        
+        // 饼图配置项（按系统功能模块重构）
+        var optionRecords = {
+            title: {
+                text: '权限管理系统功能模块分布', // 标题更新为系统主题
+                subtext: '按子功能数量统计', // 副标题补充统计维度
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                // 提示框格式优化：显示模块名、子功能数、占比
+                formatter: "{b} <br/>子功能数：{c} 个 <br/>占比：{d}%"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                // 图例数据对应核心功能模块
+                data: ['用户管理', '角色管理', '权限项管理', '关联管理', '操作日志', '系统安全', '系统配置']
+            },
+            series: [
+                {
+                    name: '子功能数量', // 系列名称明确为“子功能数量”
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    // 数据：每个模块对应子功能数量（按您提供的“1,2”统计总数）
+                    data: [
+                        { value: 2, name: '用户管理' },    // 含“用户信息维护、用户状态管理”
+                        { value: 2, name: '角色管理' },    // 含“角色创建与配置、角色关联用户”
+                        { value: 2, name: '权限项管理' },  // 含“权限项定义、权限项状态控制”
+                        { value: 2, name: '关联管理' },    // 含“关联关系查询、关联关系批量调整”
+                        { value: 2, name: '操作日志' },    // 含“日志记录、日志查询与筛选”
+                        { value: 2, name: '系统安全' },    // 含“登录安全控制、会话管理”
+                        { value: 2, name: '系统配置' }     // 含“基础参数配置、模块启用控制”
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    // 可选：添加标签显示子功能数（悬停时更清晰）
+                    label: {
+                        formatter: '{b}: {c}个'
+                    }
+                }
+            ]
+        };
+        
+        // 设置配置项并渲染图表
+        echartsRecords.setOption(optionRecords);
+        
+        // 窗口缩放自适应
+        window.onresize = function () {
+            echartsRecords.resize();
+        
+		}
+		
+		});
+</script>
+</body>
+</html>
