@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限项状态控制</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+        }
+        .permission-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+        .page-title {
+            color: #333;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form {
+            background-color: #fff;
+            padding: 0;
+        }
+        .layui-form-item {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        .layui-form-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .layui-form-label {
+            width: 200px !important;
+            text-align: left;
+            font-weight: 500;
+            color: #666;
+        }
+        .permission-group {
+            margin-bottom: 30px;
+        }
+        .group-title {
+            font-size: 16px;
+            color: #333;
+            margin: 0 0 15px 120px;
+            padding-left: 10px;
+            border-left: 3px solid #1e9fff;
+        }
+        .permission-desc {
+            margin-top: 5px;
+            margin-left: 220px;
+            color: #888;
+            font-size: 12px;
+        }
+        .action-buttons {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .layui-btn {
+            transition: all 0.2s;
+        }
+        .layui-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .status-text {
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .status-enabled {
+            color: #00b42a;
+        }
+        .status-disabled {
+            color: #f53f3f;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-container"> 
+        <div class="permission-container">
+            <h1 class="page-title">
+                <i class="fa fa-shield" style="margin-right: 10px; color: #1e9fff;"></i>
+                权限项状态控制
+            </h1>
+           
+            <form class="layui-form" lay-filter="statusForm">
+                <!-- 系统管理权限组 -->
+                <div class="permission-group">
+                   
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户管理</label>
+                        <div class="layui-input-block"> 
+                            <input type="checkbox" name="userManage" 
+                                   lay-skin="switch" 
+                                   lay-filter="statusSwitch" 
+                                   lay-text="启用|禁用" 
+                                   value="1" 
+                                   checked>
+                            <span class="status-text status-enabled">已启用</span>
+                        </div>
+                       
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">角色管理</label>
+                        <div class="layui-input-block"> 
+                            <input type="checkbox" name="roleManage" 
+                                   lay-skin="switch" 
+                                   lay-filter="statusSwitch" 
+                                   lay-text="启用|禁用" 
+                                   value="1" 
+                                   checked>
+                            <span class="status-text status-enabled">已启用</span>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日志查看</label>
+                        <div class="layui-input-block"> 
+                            <input type="checkbox" name="logView" 
+                                   lay-skin="switch" 
+                                   lay-filter="statusSwitch" 
+                                   lay-text="启用|禁用" 
+                                   value="1">
+                            <span class="status-text status-disabled">已禁用</span>
+                        </div>
+                       
+                    </div>
+                </div>
+                
+                <!-- 内容管理权限组 -->
+                <div class="permission-group">
+                    <hr>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章发布</label>
+                        <div class="layui-input-block"> 
+                            <input type="checkbox" name="articlePublish" 
+                                   lay-skin="switch" 
+                                   lay-filter="statusSwitch" 
+                                   lay-text="启用|禁用" 
+                                   value="1" 
+                                   checked>
+                            <span class="status-text status-enabled">已启用</span>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">评论管理</label>
+                        <div class="layui-input-block"> 
+                            <input type="checkbox" name="commentManage" 
+                                   lay-skin="switch" 
+                                   lay-filter="statusSwitch" 
+                                   lay-text="启用|禁用" 
+                                   value="1">
+                            <span class="status-text status-disabled">已禁用</span>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <div class="layui-input-block">
+                        <button class="layui-btn layui-btn-normal" type="button" id="submitStatus">
+                            <i class="fa fa-save" style="margin-right: 5px;"></i>
+                            保存设置
+                        </button>
+                        <button class="layui-btn layui-btn-primary" type="button" id="resetStatus" style="margin-left: 10px;">
+                            <i class="fa fa-undo" style="margin-right: 5px;"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="lib/layui-v2.6.3/layui.js"></script>
+    
+</body>
+</html>

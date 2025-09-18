@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>权限统计</title>
+		<script src="https://cdn.jsdelivr.net/npm/echarts@4.3.0/dist/echarts.min.js"></script>
+	</head>
+	<body>
+		<div id="mydiv" style="width:600px; height:400px;"></div>
+		<script>
+			// 初始化图表
+			mycharts = echarts.init(document.getElementById("mydiv"));
+			
+			// 权限统计配置
+			option = {
+				title: {
+					text: "角色权限统计",
+					subtext: "各角色拥有的权限项数量",
+					left: "center"
+				},
+				tooltip: {
+					trigger: "axis",
+					axisPointer: {
+						type: "shadow"
+					}
+				},
+				xAxis: {
+					data: ['超级管理员', '系统管理员', '部门经理', '普通员工', '访客']
+				},
+				yAxis: {
+					name: '权限项数'
+				},
+				series: [{
+					name: "权限数量",
+					type: 'bar',
+					data: [65, 42, 28, 15, 5],
+					itemStyle: {
+						color: '#1e9fff'
+					}
+				}]
+			};
+			
+			// 设置图表
+			mycharts.setOption(option);
+		</script>
+	</body>
+</html>

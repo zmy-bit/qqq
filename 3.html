@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>权限项定义</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .form-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .required::before {
+            content: "*";
+            color: #ff4d4f;
+            margin-right: 4px;
+            font-weight: bold;
+        }
+        .layui-form-label {
+            width: 120px !important;
+            text-align: left;
+        }
+        .layui-input-block {
+            margin-left: 140px !important;
+        }
+        .tip-text {
+            color: #86909c;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-card">
+        <h2 style="margin-bottom: 20px; color: #333;">权限项定义</h2>
+        <form class="layui-form" lay-filter="permDefineForm">
+            <div class="layui-form-item">
+                <label class="layui-form-label required">权限名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="permName" lay-verify="required" 
+                           placeholder="输入权限名称（如：院系管理权限、成员添加权限）" 
+                           class="layui-input" maxlength="30">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">权限标识</label>
+                <div class="layui-input-block">
+                    <input type="text" name="permKey" lay-verify="required|permKeyRule" 
+                           placeholder="按格式输入（如：dept:add、member:add）" 
+                           class="layui-input" maxlength="50">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">关联操作</label>
+                <div class="layui-input-block">
+                    <textarea name="permDesc" lay-verify="required" 
+                              placeholder="描述该权限对应的具体操作（如：允许添加院系、编辑院系信息；允许添加成员、导入成员数据）" 
+                              class="layui-textarea" rows="3" maxlength="100"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">所属模块</label>
+                <div class="layui-input-block">
+                    <select name="permModule" lay-verify="required">
+                        <option value="">请选择所属模块</option>
+                        <option value="dept">院系管理模块</option>
+                        <option value="member">成员管理模块</option>
+                        <option value="user">用户管理模块</option>
+                        <option value="role">角色管理模块</option>
+                        <option value="sys">系统配置模块</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">权限状态</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="permStatus" value="1" title="启用" checked>
+                    <input type="radio" name="permStatus" value="0" title="禁用">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="submitPermDefine">
+                        保存
+                    </button>
+                    <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 10px;">
+                        重置
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="lib/layui-v2.6.3/layui.js"></script>
+    
+
+</body>
+</html>

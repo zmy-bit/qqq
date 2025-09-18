@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>角色创建与配置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #ddf1fa;
+        }
+        .main-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .required::before {
+            content: "*";
+            color: #ff0000;
+            margin-right: 4px;
+        }
+        .permission-group {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .permission-group-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h3>角色创建与权限配置</h3>
+        <hr>
+        
+        <form class="layui-form" lay-filter="roleForm">
+            <div class="layui-form-item">
+                <label class="layui-form-label required">角色名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="roleName" lay-verify="required" 
+                           placeholder="输入角色名称（如：院系管理员）" 
+                           class="layui-input" style="width: 300px;">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">角色状态</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="status" value="1" title="启用" checked>
+                    <input type="radio" name="status" value="0" title="禁用">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">权限配置</label>
+                <div class="layui-input-block">
+                    <div class="permission-group">
+                        <div class="permission-group-title">用户管理</div>
+                        <input type="checkbox" name="perms" value="user:add" title="添加用户">
+                        <input type="checkbox" name="perms" value="user:edit" title="修改用户">
+                        <input type="checkbox" name="perms" value="user:delete" title="删除用户">
+                        <input type="checkbox" name="perms" value="user:query" title="查询用户">
+                    </div>
+                    <div class="permission-group">
+                        <div class="permission-group-title">角色管理</div>
+                        <input type="checkbox" name="perms" value="role:add" title="创建角色">
+                        <input type="checkbox" name="perms" value="role:edit" title="修改角色">
+                        <input type="checkbox" name="perms" value="role:perm" title="配置权限">
+                    </div>
+                    <div class="permission-group">
+                        <div class="permission-group-title">系统配置</div>
+                        <input type="checkbox" name="perms" value="sys:log" title="查看日志">
+                        <input type="checkbox" name="perms" value="sys:setting" title="系统设置">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="submitRole">保存配置</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="lib/layui-v2.6.3/layui.js"></script>
+    <script>
+        layui.use(['form', 'layer'], function(){
+            var form = layui.form;
+            var layer = layui.layer;
+            form.on('submit(submitRole)', function(data){
+                var selectedPerms = [];
+                $("input[name='perms']:checked").each(function(){
+                    selectedPerms.push($(this).val());
+                });
+                if(selectedPerms.length === 0){
+                    layer.msg('请至少选择一项权限', {icon: 2});
+                    return false;
+                }
+                var submitData = {
+                    roleName: data.field.roleName,
+                    status: data.field.status,
+                    permissions: selectedPerms
+                };
+                layer.msg('角色创建与权限配置成功', {icon: 1}, function(){
+                    console.log('提交的数据:', submitData);
+                });
+                
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

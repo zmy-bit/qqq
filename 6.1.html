@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统会话管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .session-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .session-info {
+            padding: 10px 0;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        .session-info:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            display: inline-block;
+            width: 120px;
+            color: #666;
+        }
+        .info-value {
+            color: #333;
+        }
+        .status-active {
+            color: #009688;
+        }
+        .status-expired {
+            color: #ff4d4f;
+        }
+        .countdown {
+            color: #1E9FFF;
+            font-weight: bold;
+        }
+        .session-table {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-container">
+        <h2 style="margin: 20px 0;">系统会话管理</h2>
+        <div class="session-card">
+            <div class="card-title">当前会话信息</div>
+            <div class="session-info">
+                <span class="info-label">会话ID：</span>
+                <span class="info-value" id="currentSessionId">loading</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">登录用户：</span>
+                <span class="info-value" id="currentUsername">loading...</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">登录时间：</span>
+                <span class="info-value" id="loginTime">loading...</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">登录IP：</span>
+                <span class="info-value" id="loginIp">loading...</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">登录设备：</span>
+                <span class="info-value" id="loginDevice">loading...</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">会话状态：</span>
+                <span class="info-value status-active" id="sessionStatus">活跃</span>
+            </div>
+            <div class="session-info">
+                <span class="info-label">剩余有效时间：</span>
+                <span class="info-value countdown" id="sessionExpireCountdown">--:--:--</span>
+            </div>
+            <div class="session-info" style="margin-top: 20px; text-align: center;">
+                <button class="layui-btn layui-btn-danger" id="logoutBtn">安全退出登录</button>
+                <button class="layui-btn layui-btn-normal" id="refreshSessionBtn" style="margin-left: 10px;">延长会话有效期</button>
+            </div>
+        </div>
+        <div class="session-card">
+            <div class="card-title">会话设置</div>
+            <form class="layui-form" lay-filter="sessionSettingForm">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会话超时时间</label>
+                    <div class="layui-input-block">
+                        <select name="sessionTimeout" lay-filter="timeoutSetting">
+                            <option value="1800">30分钟</option>
+                            <option value="3600" selected>1小时</option>
+                            <option value="7200">2小时</option>
+                            <option value="14400">4小时</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">超时提醒时间</label>
+                    <div class="layui-input-block">
+                        <select name="warningTime">
+                            <option value="30">30秒前</option>
+                            <option value="60" selected>1分钟前</option>
+                            <option value="120">2分钟前</option>
+                            <option value="300">5分钟前</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">多设备登录</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="multiDevice" value="1" title="允许" checked>
+                        <input type="radio" name="multiDevice" value="0" title="禁止">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="saveSessionSetting">保存设置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="session-card">
+            <div class="card-title">当前活跃会话列表</div>
+            <table class="layui-table session-table" lay-size="sm">
+                <thead>
+                    <tr>
+                        <th>会话ID</th>
+                        <th>用户名</th>
+                        <th>登录时间</th>
+                        <th>登录IP</th>
+                        <th>设备信息</th>
+                        <th>剩余时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="activeSessionsTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="timeoutWarning" style="display: none; padding: 20px; text-align: center;">
+        <p style="font-size: 16px; margin-bottom: 20px;">您的会话即将在 <span class="countdown" id="warningCountdown">60</span> 秒后过期</p>
+        <p style="margin-bottom: 20px;">请选择是否继续保持登录状态</p>
+        <button class="layui-btn layui-btn-normal" id="extendSessionBtn">延长会话时间</button>
+        <button class="layui-btn layui-btn-danger" id="confirmLogoutBtn" style="margin-left: 10px;">立即退出</button>
+    </div>
+    <script src="lib/layui-v2.6.3/layui.js"></script>
+</body>
+</html>

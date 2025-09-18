@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+				<style>
+					.required::before {
+						/* 星号内容 */
+						content: "*";
+							/* 红色 */
+						color: #ff0000;
+						/* 与文字保持一点距离 */
+						margin-right: 4px;
+					/* 星号加粗 */
+						font-weight: bold;				
+					}
+					.layui-form-label{
+						width: 200px !important;
+						text-align: left;
+					}
+					</style>
+		<!-- 新 Bootstrap5 核心 CSS 文件 -->
+				<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+				 
+				<!-- 最新的 Bootstrap5 核心 JavaScript 文件 -->			
+	</head>
+	<body>
+		<div class="container">
+			<h2>修改用户信息</h2>
+			<form class="layui-form">
+			<div class="mb-3 mt-3">
+				<label class="layui-form-label required">校内职务</label>
+				<input class="form-control" type="text" />
+				<button type="button" class="btn btn-warning">修改</button>
+			</div>
+				<div class="mb-3 mt-3">
+				<label class="layui-form-label required">手机</label>
+			    <input class="form-control" type="text" />
+				<button type="button" class="btn btn-warning">修改</button>
+			</div>
+			<div class="mb-3 mt-3">
+				<label class="layui-form-label required">QQ</label>
+				<input class="form-control" type="password" />
+				<button type="button" class="btn btn-warning">修改</button>
+			</div>	
+			<div class="mb-3 mt-3">
+				备注<input class="form-control" type="text" placeholder="请输入备注信息"/>
+				<button type="button" class="btn btn-warning">修改</button>
+			</div>	  			
+		</div>
+		</form>
+		
+	</body>
+</html>

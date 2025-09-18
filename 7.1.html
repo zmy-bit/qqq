@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统模块启用控制</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .module-group {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .group-title {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .group-action {
+            font-size: 14px;
+            font-weight: normal;
+        }
+        .module-list {
+            padding: 10px 20px;
+        }
+        .module-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .module-item:last-child {
+            border-bottom: none;
+        }
+        .module-info {
+            display: flex;
+            align-items: center;
+        }
+        .module-icon {
+            width: 36px;
+            height: 36px;
+            background-color: #f0f7ff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #1890ff;
+            font-size: 18px;
+        }
+        .module-detail {
+        }
+        .module-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        .module-desc {
+            font-size: 12px;
+            color: #666;
+            max-width: 600px;
+        }
+        .btn-group {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .btn-group button {
+            margin: 0 10px;
+        }
+        .status-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .status-enabled {
+            background-color: #e1f3d8;
+            color: #52c41a;
+        }
+        .status-disabled {
+            background-color: #f5f5f5;
+            color: #8c8c8c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>系统模块启用控制</h2>
+        <p style="color: #666; margin: 10px 0 20px;">根据实际需求启用或禁用系统模块，禁用的模块将不在系统中显示</p>
+        <div class="module-group">
+            <div class="group-title">
+                <span>用户管理相关模块</span>
+                <div class="group-action">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" onclick="toggleGroup('user', true)">全部启用</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-primary" onclick="toggleGroup('user', false)">全部禁用</button>
+                </div>
+            </div>
+            <div class="module-list" data-group="user">
+                <div class="module-item" data-module="user-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-user"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">用户管理模块</div>
+                            <div class="module-desc">管理系统用户信息，包括用户创建、编辑、删除、密码重置等功能</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('user-management', this)"></div>
+                    </div>
+                </div>
+                
+                <div class="module-item" data-module="role-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-group"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">角色管理模块</div>
+                            <div class="module-desc">管理系统角色信息，包括角色创建、编辑、删除及角色权限分配等功能</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('role-management', this)"></div>
+                    </div>
+                </div>
+                
+                <div class="module-item" data-module="permission-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-lock"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">权限管理模块</div>
+                            <div class="module-desc">管理系统权限项，定义各模块操作权限，支持权限细粒度控制</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('permission-management', this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="module-group">
+            <div class="group-title">
+                <span>组织管理相关模块</span>
+                <div class="group-action">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" onclick="toggleGroup('org', true)">全部启用</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-primary" onclick="toggleGroup('org', false)">全部禁用</button>
+                </div>
+            </div>
+            <div class="module-list" data-group="org">
+                <div class="module-item" data-module="department-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-home"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">部门管理模块</div>
+                            <div class="module-desc">管理企业部门结构，支持部门层级展示和管理</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('department-management', this)"></div>
+                    </div>
+                </div>
+                
+                <div class="module-item" data-module="faculty-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-building"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">院系管理模块</div>
+                            <div class="module-desc">管理学校院系信息，适用于教育机构类型的系统</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-disabled">已禁用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" onclick="toggleModule('faculty-management', this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="module-group">
+            <div class="group-title">
+                <span>系统管理相关模块</span>
+                <div class="group-action">
+                    <button class="layui-btn layui-btn-xs layui-btn-normal" onclick="toggleGroup('system', true)">全部启用</button>
+                    <button class="layui-btn layui-btn-xs layui-btn-primary" onclick="toggleGroup('system', false)">全部禁用</button>
+                </div>
+            </div>
+            <div class="module-list" data-group="system">
+                <div class="module-item" data-module="log-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-file-text"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">日志管理模块</div>
+                            <div class="module-desc">记录和管理系统操作日志、登录日志，支持日志查询和导出</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('log-management', this)"></div>
+                    </div>
+                </div>
+                
+                <div class="module-item" data-module="dict-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-list"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">字典管理模块</div>
+                            <div class="module-desc">管理系统数据字典，统一维护系统中常用的分类数据</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-enabled">已启用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" checked onclick="toggleModule('dict-management', this)"></div>
+                    </div>
+                </div>
+                
+                <div class="module-item" data-module="notice-management">
+                    <div class="module-info">
+                        <div class="module-icon">
+                            <i class="layui-icon layui-icon-bell"></i>
+                        </div>
+                        <div class="module-detail">
+                            <div class="module-name">公告管理模块</div>
+                            <div class="module-desc">发布和管理系统公告，支持公告的创建、编辑、删除和查看</div>
+                        </div>
+                    </div>
+                    <div class="module-operation">
+                        <span class="status-tag status-disabled">已禁用</span>
+                        <div class="layui-switch" lay-skin="switch" lay-text="启用|禁用" onclick="toggleModule('notice-management', this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button class="layui-btn layui-btn-normal" id="saveSettings">保存设置</button>
+            <button class="layui-btn layui-btn-primary" id="resetSettings">重置</button>
+            <button class="layui-btn layui-btn-danger" id="restoreDefaults">恢复默认设置</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/layui-src@2.6.3/layui.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>角色关联用户</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .main-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .layui-form-label {
+            width: 100px !important;
+            text-align: left;
+        }
+        .layui-input-block {
+            margin-left: 120px !important; 
+        }
+        .filter-area {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .user-list {
+            max-height: 300px;
+            overflow-y: auto; 
+        }
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <h2 style="margin-bottom: 20px; color: #333;">角色关联用户</h2>
+        
+        <form class="layui-form" lay-filter="roleUserForm">
+            <div class="filter-area">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">目标角色</label>
+                    <div class="layui-input-block">
+                        <select name="targetRole" lay-verify="required" style="width: 220px;">
+                            <option value="">请选择角色</option>
+                            <option value="superAdmin">超级管理员</option>
+                            <option value="admin">管理员</option>
+                            <option value="deptAdmin">院系管理员</option> <!-- 支持自定义角色 -->
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">搜索用户</label>
+                    <div class="layui-input-block" style="display: flex; gap: 10px;">
+                        <input type="text" name="searchUser" placeholder="输入用户名搜索" 
+                               class="layui-input" style="width: 220px;">
+                        <button type="button" class="layui-btn layui-btn-normal" id="searchBtn">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">可选用户</label>
+                <div class="layui-input-block user-list">
+                    <div class="layui-form-item" style="margin: 8px 0;">
+                        <input type="checkbox" name="selectedUser" value="1" title="张三（用户名：zhangsan）" lay-skin="primary">
+                    </div>
+                    <div class="layui-form-item" style="margin: 8px 0;">
+                        <input type="checkbox" name="selectedUser" value="2" title="李四（用户名：lisi）" lay-skin="primary">
+                    </div>
+                    <div class="layui-form-item" style="margin: 8px 0;">
+                        <input type="checkbox" name="selectedUser" value="3" title="王五（用户名：wangwu）" lay-skin="primary">
+                    </div>
+                    <div class="layui-form-item" style="margin: 8px 0;">
+                        <input type="checkbox" name="selectedUser" value="4" title="赵六（用户名：zhaoliu）" lay-skin="primary">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-normal" lay-submit lay-filter="confirm关联">
+                        确认关联选中用户
+                    </button>
+                    <button type="reset" class="layui-btn layui-btn-primary" style="margin-left: 10px;">
+                        重置选择
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="lib/layui-v2.6.3/layui.js"></script>
+</body>
+</html>

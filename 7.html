@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>系统基础参数配置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .config-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .config-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        .card-title i {
+            margin-right: 8px;
+            color: #1E9FFF;
+        }
+        .layui-form-item {
+            margin-bottom: 15px;
+        }
+        .layui-form-label {
+            width: 140px !important;
+        }
+        .layui-input-block {
+            margin-left: 170px !important;
+        }
+        .config-desc {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+            padding-left: 170px;
+        }
+        .btn-group {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .btn-group button {
+            margin: 0 10px;
+        }
+        .env-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .env-dev {
+            background-color: #e1f3d8;
+            color: #52c41a;
+        }
+        .env-test {
+            background-color: #fffbe6;
+            color: #faad14;
+        }
+        .env-prod {
+            background-color: #fff1f0;
+            color: #f5222d;
+        }
+    </style>
+</head>
+<body>
+    <div class="config-container">
+        <h2>系统基础参数配置</h2>
+        
+        <!-- 系统信息配置 -->
+        <div class="config-card">
+            <div class="card-title">
+                <i class="layui-icon layui-icon-set"></i>系统信息配置
+            </div>
+            <form class="layui-form" lay-filter="systemConfigForm">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">系统名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="systemName" lay-verify="required" placeholder="请输入系统名称" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        显示在浏览器标题和系统首页的系统名称
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">系统版本</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="systemVersion" placeholder="如：V1.0.0" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统当前版本号，用于识别系统版本信息
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">系统描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="systemDesc" placeholder="请输入系统描述信息" class="layui-textarea" rows="3"></textarea>
+                    </div>
+                    <div class="config-desc">
+                        系统功能和用途的简要描述
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">运行环境</label>
+                    <div class="layui-input-block">
+                        <select name="environment" lay-filter="environment">
+                            <option value="dev">开发环境</option>
+                            <option value="test">测试环境</option>
+                            <option value="prod">生产环境</option>
+                        </select>
+                    </div>
+                    <div class="config-desc">
+                        系统当前运行的环境类型，将影响部分功能的启用与禁用
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否开启日志</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="logEnabled" value="1" title="开启" checked>
+                        <input type="radio" name="logEnabled" value="0" title="关闭">
+                    </div>
+                    <div class="config-desc">
+                        开启后将记录系统运行日志和用户操作日志
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <!-- 运行环境参数配置 -->
+        <div class="config-card">
+            <div class="card-title">
+                <i class="layui-icon layui-icon-server"></i>运行环境参数配置
+            </div>
+            <form class="layui-form" lay-filter="environmentConfigForm">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">服务器地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="serverHost" lay-verify="required" placeholder="如：127.0.0.1 或 domain.com" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统服务器的IP地址或域名
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">服务端口号</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="serverPort" lay-verify="required|number" placeholder="如：8080" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统服务监听的端口号，范围1-65535
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上下文路径</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="contextPath" placeholder="如：/system (默认为/)" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统访问的上下文路径，为空则使用根路径
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">超时时间(秒)</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="timeout" lay-verify="required|number" placeholder="如：30" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统请求超时时间，单位为秒
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">最大连接数</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="maxConnections" lay-verify="required|number" placeholder="如：1000" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统支持的最大并发连接数
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="config-card">
+            <div class="card-title">
+                <i class="layui-icon layui-icon-database"></i>数据存储参数配置
+            </div>
+            <form class="layui-form" lay-filter="databaseConfigForm">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库类型</label>
+                    <div class="layui-input-block">
+                        <select name="dbType" lay-filter="dbType">
+                            <option value="mysql">MySQL</option>
+                            <option value="oracle">Oracle</option>
+                            <option value="sqlserver">SQL Server</option>
+                            <option value="postgresql">PostgreSQL</option>
+                        </select>
+                    </div>
+                    <div class="config-desc">
+                        系统使用的数据库类型
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库地址</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="dbHost" lay-verify="required" placeholder="如：127.0.0.1" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        数据库服务器的IP地址或域名
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库端口</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="dbPort" lay-verify="required|number" placeholder="如：3306" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        数据库服务监听的端口号
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="dbName" lay-verify="required" placeholder="请输入数据库名称" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统使用的数据库实例名称
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库用户名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="dbUsername" lay-verify="required" placeholder="数据库登录用户名" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        连接数据库的用户名，建议使用具有适当权限的专用账户
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据库密码</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="dbPassword" placeholder="数据库登录密码" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        连接数据库的密码，保存时将进行加密处理
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">连接池大小</label>
+                    <div class="layui-input-block">
+                        <input type="number" name="poolSize" lay-verify="required|number" placeholder="如：20" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        数据库连接池的大小，根据系统并发量调整
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label class="layui-form-label">数据备份路径</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="backupPath" placeholder="如：/data/backup" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="config-desc">
+                        系统自动备份数据的存储路径
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="btn-group">
+            <button class="layui-btn layui-btn-normal" id="saveConfig">保存配置</button>
+            <button class="layui-btn layui-btn-primary" id="resetConfig">重置</button>
+            <button class="layui-btn layui-btn-danger" id="restoreDefault">恢复默认配置</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/layui-src@2.6.3/layui.js"></script>
+</body>
+</html>
